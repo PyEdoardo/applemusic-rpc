@@ -21,7 +21,7 @@
     <ClCompile Include="AppleMusic.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="handlerAudio.cpp">
+    <ClCompile Include="handlerAudio\HandlerAudio.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,8 +29,17 @@
     <ClInclude Include="AppleMusic.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="handlerAudio.h">
+    <ClInclude Include="handlerAudio\HandlerAudio.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="discord\include\discord_rpc.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="LICENSE" />
+    <None Include="AppleMus.3ea7eeb9\x64\Debug\discord_game_sdk.dll" />
+    <None Include="Debug\discord_game_sdk.dll" />
   </ItemGroup>
 </Project>
