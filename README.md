@@ -2,8 +2,7 @@
 
 Este projeto integra a reprodução de música do Apple Music com o Discord, utilizando a **Discord Rich Presence**. Ele permite que o nome da música, artista e álbum sejam exibidos diretamente no seu perfil do Discord.
 
-**IMPORTANTE:**
-**Nota:** O projeto ainda não filtra outras fontes de áudio (como YouTube, por exemplo), portanto, pode exibir informações de reprodução de outras mídias, além do Apple Music.
+**IMPORTANTE:** O projeto ainda não filtra outras fontes de áudio (como YouTube, por exemplo), portanto, pode exibir informações de reprodução de outras mídias, além do Apple Music.
 **Motivo:** O SDK do windows é um pouco delicado de mexer, e estou pesquisando como ancorar o aplicativo no apple music, acessando pelo pid e evitando exibir as informações de outros apps, atualmente ele usa o Windows::Media pra pegar os dados já que apple não facilita nem um pouco a criação de apis.
 
 ## Funcionalidades
@@ -25,4 +24,4 @@ Este projeto integra a reprodução de música do Apple Music com o Discord, uti
    Se você ainda não fez isso, clone o repositório com o seguinte comando:
 
    ```bash
-   git clone https://seu-repositorio.git
+   git clone https://github.com/PyEdoardo/applemusic-rpc
