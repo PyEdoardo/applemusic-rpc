@@ -1,3 +1,4 @@
+#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
 #include "AppleMusic.h"
 #include <chrono>
 #include <locale>
@@ -8,7 +9,7 @@ using namespace chrono;
 
 AppleMusic::AppleMusic() 
 {
-
+	AppleMusic::setActualTime();
 }
 
 AppleMusic::AppleMusic(string name, string url, chrono::system_clock::time_point time) : name(name), url(url), time(time) 

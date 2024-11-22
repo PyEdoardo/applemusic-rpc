@@ -109,7 +109,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
@@ -139,10 +139,43 @@
   <ItemGroup>
     <ClCompile Include="AppleMusicRPC_CPP.cpp" />
     <ClCompile Include="AppleMusic.cpp" />
+    <ClCompile Include="discord\cpp\achievement_manager.cpp" />
+    <ClCompile Include="discord\cpp\activity_manager.cpp" />
+    <ClCompile Include="discord\cpp\application_manager.cpp" />
+    <ClCompile Include="discord\cpp\core.cpp" />
+    <ClCompile Include="discord\cpp\image_manager.cpp" />
+    <ClCompile Include="discord\cpp\lobby_manager.cpp" />
+    <ClCompile Include="discord\cpp\network_manager.cpp" />
+    <ClCompile Include="discord\cpp\overlay_manager.cpp" />
+    <ClCompile Include="discord\cpp\relationship_manager.cpp" />
+    <ClCompile Include="discord\cpp\storage_manager.cpp" />
+    <ClCompile Include="discord\cpp\store_manager.cpp" />
+    <ClCompile Include="discord\cpp\types.cpp" />
+    <ClCompile Include="discord\cpp\user_manager.cpp" />
+    <ClCompile Include="discord\cpp\voice_manager.cpp" />
     <ClCompile Include="handlerAudio\HandlerAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AppleMusic.h" />
+    <ClInclude Include="discord\cpp\achievement_manager.h" />
+    <ClInclude Include="discord\cpp\activity_manager.h" />
+    <ClInclude Include="discord\cpp\application_manager.h" />
+    <ClInclude Include="discord\cpp\core.h" />
+    <ClInclude Include="discord\cpp\discord.h" />
+    <ClInclude Include="discord\cpp\discord_register.h" />
+    <ClInclude Include="discord\cpp\discord_rpc.h" />
+    <ClInclude Include="discord\cpp\event.h" />
+    <ClInclude Include="discord\cpp\ffi.h" />
+    <ClInclude Include="discord\cpp\image_manager.h" />
+    <ClInclude Include="discord\cpp\lobby_manager.h" />
+    <ClInclude Include="discord\cpp\network_manager.h" />
+    <ClInclude Include="discord\cpp\overlay_manager.h" />
+    <ClInclude Include="discord\cpp\relationship_manager.h" />
+    <ClInclude Include="discord\cpp\storage_manager.h" />
+    <ClInclude Include="discord\cpp\store_manager.h" />
+    <ClInclude Include="discord\cpp\types.h" />
+    <ClInclude Include="discord\cpp\user_manager.h" />
+    <ClInclude Include="discord\cpp\voice_manager.h" />
     <ClInclude Include="discord\include\discord_rpc.h" />
     <ClInclude Include="handlerAudio\HandlerAudio.h" />
   </ItemGroup>

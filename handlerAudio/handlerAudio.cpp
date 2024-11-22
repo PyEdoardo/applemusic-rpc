@@ -1,59 +1,66 @@
-#define _CRT_SECURE_NO_WARNINGS
-
+#include "HandlerAudio.h"
+#include <locale>
+#include <codecvt>
 #include <iostream>
-#include <string>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Media.Control.h>
-#include <AppleMusic.h>
-#include <AppleMusic.cpp>
 
 using namespace winrt;
 using namespace Windows::Foundation;
 using namespace Windows::Media::Control;
 
-class HandlerAudio {
-public:
-    HandlerAudio() {
-        init_apartment(); 
+std::string Music::convertHStringToString(const hstring& hstr) {
+    std::wstring wstr = hstr.c_str();
+    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
+    return converter.to_bytes(wstr);
+}
+
+Music HandlerAudio::ParseAlbumInfo(Music& music) {
+    size_t dashPos = music.name.find(" - ");
+
+    if (dashPos != std::string::npos) {
+       
+        music.artist = music.name.substr(0, dashPos); 
+        music.album = music.name.substr(dashPos + 3); 
+    }
+    else {
+        
+        music.artist = "Desconhecido";
+        music.album = music.name;
     }
 
-    ~HandlerAudio() {
+    return music; 
+}
 
+HandlerAudio::HandlerAudio() {
+    init_apartment(); 
+}
+
+HandlerAudio::~HandlerAudio() = default;
+
+Music HandlerAudio::GetCurrentMediaDetails() {
+    Music music;
+    try {
+        auto sessionManager = GlobalSystemMediaTransportControlsSessionManager::RequestAsync().get();
+        auto currentSession = sessionManager.GetCurrentSession();
+        auto playbackStatus = currentSession.GetPlaybackInfo();
+        if (!currentSession) {
+            music.name = "Nenhuma mídia em execução";
+            music.artist = "N/A";
+            music.album = "N/A";
+            return music;
+        }
+
+        auto mediaProperties = currentSession.TryGetMediaPropertiesAsync().get();
+        music.name = Music::convertHStringToString(mediaProperties.Title().empty() ? L"(Desconhecido)" : mediaProperties.Title());
+        music.artist = Music::convertHStringToString(mediaProperties.AlbumArtist().empty() ? L"(Desconhecido)" : mediaProperties.AlbumArtist());
+        music.album = Music::convertHStringToString(mediaProperties.AlbumTitle().empty() ? L"(Desconhecido)" : mediaProperties.AlbumTitle());
     }
+    catch (const hresult_error& ex) {
+        music.name = "Erro ao obter informações da mídia";
+        music.artist = "Erro";
+        music.album = ex.message().empty() ? "Detalhes indisponíveis" : Music::convertHStringToString(ex.message());
+    }   
     
-    AppleMusic music = AppleMusic::AppleMusic();
-
-    AppleMusic GetCurrentMediaDetails() {
-        try {
-            auto sessionManager = GlobalSystemMediaTransportControlsSessionManager::RequestAsync().get();
-            auto currentSession = sessionManager.GetCurrentSession();
-            if (!currentSession) {
-                music.setName("Nenhuma Midia em reprodução no momento.");
-                return music;
-            }
-
-            auto mediaProperties = currentSession.TryGetMediaPropertiesAsync().get();
-            std::wstring title = mediaProperties.Title().empty() ? L"(Desconhecido)" : mediaProperties.Title().c_str();
-            std::wstring artist = mediaProperties.AlbumArtist().empty() ? L"(Desconhecido)" : mediaProperties.AlbumArtist().c_str();
-            std::wstring album = mediaProperties.AlbumTitle().empty() ? L"(Desconhecido)" : mediaProperties.AlbumTitle().c_str();
-
-            std::string titleMusic = music.convertWStringToString(title);
-            std::string artistMusic = music.convertWStringToString(artist);
-            std::string albumArtist = music.convertWStringToString(album);
-
-            music.setName(titleMusic);
-            music.setArtista(artistMusic);
-            music.setAlbum(albumArtist);
-
-            std::wstring details = L"Titulo: " + title + L"\n";
-            details += L"Artista: " + artist + L"\n";
-            details += L"Album: " + album + L"\n";
-
-            return music;
-        }
-        catch (const hresult_error& ex) {
-            music.setName("Erro ao obter informações da mídia : ");
-            return music;
-        }
-    }
-};
+    return music;
+}
