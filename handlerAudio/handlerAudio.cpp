@@ -4,6 +4,8 @@
 #include <string>
 #include <winrt/Windows.Foundation.h>
 #include <winrt/Windows.Media.Control.h>
+#include <AppleMusic.h>
+#include <AppleMusic.cpp>
 
 using namespace winrt;
 using namespace Windows::Foundation;
@@ -18,13 +20,16 @@ public:
     ~HandlerAudio() {
 
     }
+    
+    AppleMusic music = AppleMusic::AppleMusic();
 
-    std::wstring GetCurrentMediaDetails() {
+    AppleMusic GetCurrentMediaDetails() {
         try {
             auto sessionManager = GlobalSystemMediaTransportControlsSessionManager::RequestAsync().get();
             auto currentSession = sessionManager.GetCurrentSession();
             if (!currentSession) {
-                return L"Nenhuma mídia em reprodução no momento.";
+                music.setName("Nenhuma Midia em reprodução no momento.");
+                return music;
             }
 
             auto mediaProperties = currentSession.TryGetMediaPropertiesAsync().get();
@@ -32,14 +37,23 @@ public:
             std::wstring artist = mediaProperties.AlbumArtist().empty() ? L"(Desconhecido)" : mediaProperties.AlbumArtist().c_str();
             std::wstring album = mediaProperties.AlbumTitle().empty() ? L"(Desconhecido)" : mediaProperties.AlbumTitle().c_str();
 
-            std::wstring details = L"Título: " + title + L"\n";
-            details += L"Artista: " + artist + L"\n";
-            details += L"Álbum: " + album + L"\n";
+            std::string titleMusic = music.convertWStringToString(title);
+            std::string artistMusic = music.convertWStringToString(artist);
+            std::string albumArtist = music.convertWStringToString(album);
 
-            return details;
+            music.setName(titleMusic);
+            music.setArtista(artistMusic);
+            music.setAlbum(albumArtist);
+
+            std::wstring details = L"Titulo: " + title + L"\n";
+            details += L"Artista: " + artist + L"\n";
+            details += L"Album: " + album + L"\n";
+
+            return music;
         }
         catch (const hresult_error& ex) {
-            return L"Erro ao obter informações da mídia: " + std::wstring(ex.message().c_str());
+            music.setName("Erro ao obter informações da mídia : ");
+            return music;
         }
     }
 };

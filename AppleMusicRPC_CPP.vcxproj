@@ -75,7 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\um\x64;C:\Users\edoar\source\repos\PyEdoardo\applemusic-rpc\discord\lib\x86_64;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\um\x64;C:\Users\edoar\source\repos\PyEdoardo\applemusic-rpc\discord\cpp;C:\Users\edoar\source\repos\PyEdoardo\applemusic-rpc\discord\lib\x86_64;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files (x86)\Windows Kits\10\Lib\10.0.22621.0\um\x64;C:\Users\edoar\source\repos\PyEdoardo\applemusic-rpc\discord\cpp;C:\Users\edoar\source\repos\PyEdoardo\applemusic-rpc\discord\lib\x86_64;C:\Users\edoar\source\repos\PyEdoardo\applemusic-rpc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -147,6 +147,7 @@
     <ClInclude Include="handlerAudio\HandlerAudio.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="AppleMus.3ea7eeb9\x64\Debug\discord_game_sdk.dll" />
     <None Include="Debug\discord_game_sdk.dll" />
     <None Include="LICENSE" />

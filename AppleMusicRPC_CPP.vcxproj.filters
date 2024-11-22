@@ -41,5 +41,6 @@
     <None Include="LICENSE" />
     <None Include="AppleMus.3ea7eeb9\x64\Debug\discord_game_sdk.dll" />
     <None Include="Debug\discord_game_sdk.dll" />
+    <None Include=".gitignore" />
   </ItemGroup>
 </Project>
